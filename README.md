@@ -1,137 +1,60 @@
-# API de Gestión de Pacientes
+# ROMI API - Asistente Médico Virtual
 
-API RESTful para el manejo de pacientes y sus síntomas, construida con Node.js, TypeScript, Express y TypeORM con SQLite.
+API para gestión de pacientes y síntomas. Construida con Node.js, TypeScript y SQLite.
 
-## 🚀 Requisitos Previos
+## 🚀 Inicio Rápido
 
-- Node.js (v14 o superior)
-- npm (v6 o superior)
-- Git (opcional)
-
-## 🛠 Instalación
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/tu-usuario/romi-api.git
-   cd romi-api
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Configuración del entorno**
-   - Copiar el archivo `.env.example` a `.env`
-   - Configurar las variables según sea necesario
-
-## ⚙️ Configuración
-
-Archivo `.env`:
-```env
-PORT=4000
-NODE_ENV=development
-DB_FILENAME=database.sqlite
-```
-
-## 🚦 Iniciar la aplicación
-
-### Desarrollo
 ```bash
-# Modo desarrollo con reinicio automático
+# Instalar dependencias
+npm install
+
+# Configurar variables de entorno
+cp .env.example .env
+
+# Iniciar en modo desarrollo
 npm run dev
 ```
 
-### Producción
+La API estará disponible en `http://localhost:4000`
+
+## � Endupoints
+
+| Método   | Ruta                 | Descripción         |
+| -------- | -------------------- | ------------------- |
+| `GET`    | `/health`            | Estado de la API    |
+| `GET`    | `/api/pacientes`     | Listar pacientes    |
+| `POST`   | `/api/pacientes`     | Crear paciente      |
+| `GET`    | `/api/pacientes/:id` | Obtener paciente    |
+| `PUT`    | `/api/pacientes/:id` | Actualizar paciente |
+| `DELETE` | `/api/pacientes/:id` | Eliminar paciente   |
+
+### Ejemplo de uso
+
 ```bash
-# Compilar TypeScript a JavaScript
-npm run build
-
-# Iniciar la aplicación
-npm start
+# Crear paciente
+curl -X POST http://localhost:4000/api/pacientes \
+  -H "Content-Type: application/json" \
+  -d '{"nombre": "Juan Pérez", "edad": 35, "sintomas": ["fiebre", "tos"]}'
 ```
 
-## 📚 Documentación de la API
+## � ETecnologías
 
-### Endpoints
+- **Node.js** + **TypeScript** - Runtime y tipado
+- **Express.js** - Framework web
+- **TypeORM** - ORM para base de datos
+- **SQLite** - Base de datos embebida
+- **Winston** - Logging
+- **Class-validator** - Validaciones
 
-#### Crear un nuevo paciente
-```http
-POST /api/pacientes
-Content-Type: application/json
-
-{
-    "nombre": "Juan Pérez",
-    "edad": 35,
-    "sintomas": ["dolor de cabeza", "fiebre"]
-}
-```
-
-#### Obtener todos los pacientes
-```http
-GET /api/pacientes
-```
-
-#### Obtener un paciente por ID
-```http
-GET /api/pacientes/1
-```
-
-#### Actualizar un paciente
-```http
-PUT /api/pacientes/1
-Content-Type: application/json
-
-{
-    "nombre": "Juan Pérez López",
-    "edad": 36,
-    "sintomas": ["dolor de cabeza", "fiebre", "tos seca"]
-}
-```
-
-#### Eliminar un paciente
-```http
-DELETE /api/pacientes/1
-```
-
-### Health Check
-```http
-GET /health
-```
-
-## 🧪 Pruebas
-
-### Ejecutar pruebas
-```bash
-npm test
-```
-
-### Ejecutar linter
-```bash
-npm run lint
-```
-
-## 📁 Estructura del Proyecto
+## 📁 Estructura
 
 ```
 src/
-├── config/           # Configuraciones
-├── controllers/      # Controladores
-├── db/              # Configuración de la base de datos
-├── entities/        # Entidades de TypeORM
-├── middleware/      # Middlewares de Express
-├── routes/          # Rutas de la API
-├── utils/           # Utilidades
-└── index.ts         # Punto de entrada de la aplicación
+├── controllers/     # Lógica de negocio
+├── entities/        # Modelos de datos
+├── routes/          # Endpoints de la API
+├── middleware/      # Validaciones y errores
+└── config/          # Configuración
 ```
 
-## 🛡️ Validaciones
-
-- **Nombre**: Requerido, máximo 100 caracteres
-- **Edad**: Número entero entre 0 y 120
-- **Síntomas**: Array de strings, no puede estar vacío
-
-## 📝 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 # romi-api
